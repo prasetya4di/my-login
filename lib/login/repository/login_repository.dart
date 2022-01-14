@@ -5,5 +5,5 @@ import 'package:my_login/login/model/login_success.dart';
 
 abstract class LoginRepository extends GetConnect {
   Future<Either<LoginFailed, LoginSuccess>> login(
-      {required String username, required String password});
+      String username, String password);
 }

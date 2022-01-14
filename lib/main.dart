@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
+  GetConnect().httpClient.baseUrl = "https://reqres.in/api/";
   runApp(const MyApp());
 }
 

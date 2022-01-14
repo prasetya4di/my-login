@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_login/login/domain/impl/login_use_case_impl.dart';
 import 'package:my_login/login/repository/impl/login_repository_impl.dart';
 
 void main() {
   GetConnect().httpClient.baseUrl = "https://reqres.in/api/";
   Get.put(LoginRepositoryImpl());
+  Get.put(LoginUseCaseImpl());
   runApp(const MyApp());
 }
 

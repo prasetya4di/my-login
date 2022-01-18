@@ -1,23 +1,27 @@
-import 'package:either_dart/either.dart';
+import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 import 'package:my_login/login/domain/login_use_case.dart';
+import 'package:my_login/util/either_extension.dart';
 
 class LoginController extends GetxController {
-  final LoginUseCase _loginUseCase = Get.find();
+  final LoginUseCase _loginUseCase;
   RxBool isLoading = false.obs;
   RxString errorMessage = "".obs;
   String _username = "";
   String _password = "";
 
-  void doLogin() async {
+  LoginController(this._loginUseCase);
+
+  void doLogin() {
     isLoading.value = true;
-    _loginUseCase
-        .execute(_username, _password)
-        .either((failed) => errorMessage.value = failed.error,
-            (success) => errorMessage.value = success.token)
-        .catchError((value) {
-      errorMessage.value = "Failed when get data from API";
-    }).whenComplete(() => isLoading.value = false);
+    Task(() => _loginUseCase.execute(_username, _password))
+        .attempt()
+        .mapLeftToFailure()
+        .run()
+        .then((value) => value.fold(
+            (l) => errorMessage.value = l.failure.toString(),
+            (r) => errorMessage.value = r.token))
+        .whenComplete(() => isLoading.value = false);
   }
 
   set password(String value) {

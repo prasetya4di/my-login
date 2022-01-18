@@ -1,8 +1,5 @@
-import 'package:either_dart/either.dart';
-import 'package:my_login/login/model/login_failed.dart';
-import 'package:my_login/login/model/login_success.dart';
+import 'package:my_login/login/model/login_data.dart';
 
 abstract class LoginRepository {
-  Future<Either<LoginFailed, LoginSuccess>> login(
-      String username, String password);
+  Future<LoginData> login(String username, String password);
 }

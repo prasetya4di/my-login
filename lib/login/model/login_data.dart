@@ -1,11 +1,11 @@
 /// token : "QpwL5tke4Pnpja7X4"
 
-class LoginSuccess {
+class LoginData {
   late String token;
 
-  LoginSuccess({required this.token});
+  LoginData({required this.token});
 
-  LoginSuccess.fromJson(dynamic json) {
+  LoginData.fromJson(dynamic json) {
     token = json['token'];
   }
 

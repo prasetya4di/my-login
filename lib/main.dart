@@ -9,8 +9,8 @@ import 'package:my_login/login/view/login_view.dart';
 
 void main() {
   Get.lazyPut<LoginRepository>(() => LoginRepositoryImpl());
-  Get.lazyPut<LoginUseCase>(() => LoginUseCaseImpl());
-  Get.lazyPut(() => LoginController());
+  Get.lazyPut<LoginUseCase>(() => LoginUseCaseImpl(Get.find()));
+  Get.lazyPut(() => LoginController(Get.find()));
   runApp(const MyApp());
 }
 

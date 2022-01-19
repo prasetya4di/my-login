@@ -1,8 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:get/get.dart';
 import 'package:mockito/mockito.dart';
 
 class MockGetConnect extends Mock implements GetConnect {
   Response mockResponse = const Response();
+  Fail? mockFail;
 
   @override
   Future<Response<T>> post<T>(
@@ -14,6 +16,7 @@ class MockGetConnect extends Mock implements GetConnect {
     Decoder<T>? decoder,
     Progress? uploadProgress,
   }) async {
+    if (mockFail != null) throw mockFail!;
     return Response<T>(
         statusCode: mockResponse.statusCode, body: mockResponse.body);
   }

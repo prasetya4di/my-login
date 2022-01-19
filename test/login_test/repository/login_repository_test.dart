@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get_connect.dart';
 import 'package:my_login/login/model/login_data.dart';
@@ -17,6 +18,13 @@ void main() {
       LoginData result = await loginRepository.login("pras", "password");
       expect(result, isA<LoginData>());
       expect(result.token, expectedToken);
+    });
+    test("Throw Fail when an error happen", () async {
+      Fail expectedFail = Fail("error from server");
+      GetConnect connect = MockGetConnect()..mockFail = expectedFail;
+      LoginRepository loginRepository = LoginRepositoryImpl(connect);
+      expect(() => loginRepository.login("pras", "password"),
+          throwsA(expectedFail));
     });
   });
 }

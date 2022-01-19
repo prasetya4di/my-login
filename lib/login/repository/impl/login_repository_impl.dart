@@ -6,11 +6,15 @@ import 'package:my_login/login/model/login_data.dart';
 import 'package:my_login/login/repository/login_repository.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
+  late final GetConnect client;
+
+  LoginRepositoryImpl(this.client);
+
   @override
   Future<LoginData> login(String username, String password) async {
     try {
-      Response response = await GetConnect().post("https://reqres.in/api/login",
-          {"username": username, "password": password});
+      Response response = await client
+          .post("/login", {"username": username, "password": password});
       if (response.statusCode != HttpStatus.ok) {
         throw Fail("Username atau password salah");
       }

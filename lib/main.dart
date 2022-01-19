@@ -8,7 +8,8 @@ import 'package:my_login/login/repository/login_repository.dart';
 import 'package:my_login/login/view/login_view.dart';
 
 void main() {
-  Get.lazyPut<LoginRepository>(() => LoginRepositoryImpl());
+  Get.lazyPut(() => GetConnect()..baseUrl = "https://reqres.in/api");
+  Get.lazyPut<LoginRepository>(() => LoginRepositoryImpl(Get.find()));
   Get.lazyPut<LoginUseCase>(() => LoginUseCaseImpl(Get.find()));
   Get.lazyPut(() => LoginController(Get.find()));
   runApp(const MyApp());

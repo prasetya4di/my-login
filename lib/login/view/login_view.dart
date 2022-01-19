@@ -27,7 +27,7 @@ class LoginView extends StatelessWidget {
                   autocorrect: false,
                 ),
                 IgnorePointer(
-                  ignoring: _loginController.isLoading.value,
+                  ignoring: _loginController.viewState.value.isLoading,
                   child: TextButton(
                     onPressed: () {
                       _loginController.doLogin();
@@ -35,7 +35,7 @@ class LoginView extends StatelessWidget {
                     child: const Text("Login"),
                   ),
                 ),
-                Text(_loginController.errorMessage.string)
+                Text(_loginController.viewState.value.message)
               ],
             )),
       ),

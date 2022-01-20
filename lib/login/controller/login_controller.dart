@@ -12,7 +12,7 @@ class LoginController extends GetxController {
 
   LoginController(this._loginUseCase);
 
-  void doLogin() {
+  doLogin() {
     viewState.value.showLoading();
     Task(() => _loginUseCase.execute(_username, _password))
         .attempt()
